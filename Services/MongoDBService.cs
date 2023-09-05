@@ -63,6 +63,15 @@ namespace test.Services
             await _listCollection.UpdateOneAsync(filter, update);
         }
 
+        public async Task DeleteAllItemsAsync(string id)
+        {
+            var filter = Builders<GList>.Filter.Eq("Id", id);
+
+            var update = Builders<GList>.Update.Set("items", new List<Item>());
+
+            await _listCollection.UpdateOneAsync(filter, update);
+        }
+
         public async Task DeleteAsync(string id)
         {
             FilterDefinition<GList> filter = Builders<GList>.Filter.Eq("Id", id);

@@ -52,6 +52,14 @@ namespace test.Controllers
         }
 
         [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteAllItems(string id)
+        {
+            await _context.DeleteAllItemsAsync(id);
+
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteItem(string id, string itemName)
         {
             await _context.DeleteItemAsync(id, itemName);
