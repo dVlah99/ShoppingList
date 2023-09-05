@@ -39,7 +39,7 @@ namespace test.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> EditItem(string id, string itemName ,[FromBody] Item item)
         {
-            await _context.EditItem(id, itemName, item);
+            await _context.EditItemAsync(id, itemName, item);
             return NoContent();
         }
 
@@ -47,6 +47,14 @@ namespace test.Controllers
         public async Task<IActionResult> DeleteList(string id)
         {
             await _context.DeleteAsync(id);
+
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteItem(string id, string itemName)
+        {
+            await _context.DeleteItemAsync(id, itemName);
 
             return NoContent();
         }
