@@ -4,3 +4,7 @@ obj/
 *.suo
 .vs/
 .vs/*
+.vs/FileContentIndex/
+.vs/FileContentIndex/*
+bin/Debug/net7.0/
+bin/Debug/net7.0/*
