@@ -36,8 +36,6 @@ namespace test.Services
 
         public async Task EditItemAsync(string id, string itemName,Item editedItem)
         {
-
-
             var filter = Builders<GList>.Filter.And(
             Builders<GList>.Filter.Eq("Id", id),
             Builders<GList>.Filter.Eq("items.Name", itemName));
@@ -49,6 +47,30 @@ namespace test.Services
             await _listCollection.UpdateOneAsync(filter, update);
 
             return;
+        }
+
+        public async Task CheckItemAsync(string id, string itemName)
+        {
+            var filter = Builders<GList>.Filter.And(
+                Builders<GList>.Filter.Eq("Id", id),
+                Builders<GList>.Filter.Eq("items.Name", itemName)
+            );
+            var listItem = await _listCollection.Find(filter).FirstOrDefaultAsync();
+
+            if (listItem != null)
+            {
+                foreach (var item in listItem.Items)
+                {
+                    if (item.Name == itemName)
+                    {
+                        item.Check = !item.Check;
+                        break;
+                    }
+                }
+
+                var update = Builders<GList>.Update.Set("items", listItem.Items);
+                await _listCollection.UpdateOneAsync(filter, update);
+            }
         }
 
         public async Task DeleteItemAsync(string id, string itemName)

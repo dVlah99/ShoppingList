@@ -43,6 +43,13 @@ namespace test.Controllers
             return NoContent();
         }
 
+        [HttpPut("{id}")]
+        public async Task<IActionResult> CheckItem(string id, string itemName)
+        {
+            await _context.CheckItemAsync(id, itemName);
+            return NoContent();
+        }
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteList(string id)
         {

@@ -2,5 +2,40 @@
 bin/
 obj/
 *.suo
+
+# Visual Studio files
+.vscode/
 .vs/
-.vs/*
+*.user
+*.userprefs
+*.sln.docstates
+
+# Rider files
+.idea/
+
+# Mono Auto Generated Files
+mono_crash.*
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Windows shortcuts
+*.lnk
+
+# Compiled C# files
+*.dll
+*.exe
+*.pdb
