@@ -40,7 +40,6 @@ namespace test.Controllers
         public async Task<IActionResult> EditItem(string id, string itemName ,[FromBody] Item item)
         {
             await _context.EditItemAsync(id, itemName, item);
-            Console.WriteLine("DELETE THIS!!");
             return NoContent();
         }
 
@@ -48,7 +47,6 @@ namespace test.Controllers
         public async Task<IActionResult> DeleteList(string id)
         {
             await _context.DeleteAsync(id);
-            Console.WriteLine("DELETE THIS!!");
 
             return NoContent();
         }
