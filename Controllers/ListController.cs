@@ -17,18 +17,33 @@ namespace test.Controllers
             _context = context;
         }
 
+        //GET
         [HttpGet]
         public async Task<List<GList>> GetLists()
         {
             return await _context.GetAsync();
         }
 
+        //POST
         [HttpPost]
         public async Task<IActionResult> PostList([FromBody] GList _list) {
+            foreach (var item in _list.Items) {
+                var enumValidation = EnumValidator.IsEnumValueValid<Measurement>(item.Measurement.ToUpper());
+                if(!enumValidation)
+                {
+                    return NoContent();
+                }
+            }
             await _context.CreateAsync(_list);
             return CreatedAtAction(nameof(GetLists), new {id = _list.Id, storeName = _list.StoreName, _list});
         }
 
+        public static bool IsEnumValueValid<TEnum>(string value) where TEnum : struct, Enum
+        {
+            return Enum.TryParse(value, out TEnum result);
+        }
+
+        //PUT
         [HttpPut("{id}")]
         public async Task<IActionResult> PutList(string id, [FromBody] Item item)
         {
@@ -50,6 +65,7 @@ namespace test.Controllers
             return NoContent();
         }
 
+        //DELETE
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteList(string id)
         {
